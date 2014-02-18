@@ -24,7 +24,7 @@ $(function(){
       var message = $('#saidaChat').val();
       if(message.length > 0){
         iosocket.send(message);
-        WriteMessage(message);
+        WriteMessage(message, true);
         $('#saidaChat').val('');
         $('.cont').text(250);
       }
@@ -40,21 +40,25 @@ var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Const
 var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
 var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
 
-var WriteMessage = function (message){
+var WriteMessage = function (message, my){
+  var classMy = "";
+  if(my) {
+    classMy = "myli";
+  }
   if(message.indexOf('.jpg') > -1 || message.indexOf('.png') > -1 || message.indexOf('.jpeg') > -1 || message.indexOf('.gif') > -1){
     var srcimg = GetImage(message);
     var img = '<img src="'+GetImage(message)+'"/>';
     if(message.replace(srcimg, '').length > 0){
-      $('#entradaChat').append($('<li></li>').text(message.replace(srcimg, '')));  
+      $('#entradaChat').append($('<li class="'+classMy+'"></li>').text(message.replace(srcimg, '')));  
     }
-    $('#entradaChat').append($('<li></li>').html(img));
+    $('#entradaChat').append($('<li class="'+classMy+'"></li>').html(img));
   } else if(message.indexOf('www.youtube.com/watch?v=') > -1 || message.indexOf('youtu.be/') > -1){
     var srcvideo = GetVideo(message);
     var video = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+srcvideo+'" frameborder="0" allowfullscreen></iframe>';
-    $('#entradaChat').append($('<li></li>').text(message));  
-    $('#entradaChat').append($('<li></li>').html(video));
+    $('#entradaChat').append($('<li class="'+classMy+'"></li>').text(message));  
+    $('#entradaChat').append($('<li class="'+classMy+'"></li>').html(video));
   } else {
-    $('#entradaChat').append($('<li></li>').text(message));
+    $('#entradaChat').append($('<li class="'+classMy+'"></li>').text(message));
   }
   if($('#autoscroll').get(0).checked){
     window.scrollTo(0,document.body.scrollHeight);
@@ -110,8 +114,13 @@ var GetVideo = function (message){
   }
 }
 
+var GetMusic = function (message) {
+  
+}
+
 var PlaySound = function() {
-  $('#embed').remove();
+  if($('#notification').get(0).checked){
+    $('#embed').remove();
     var embed = document.getElementById("embed");
     if (!embed) {
         var embed = document.createElement("embed");
@@ -122,4 +131,5 @@ var PlaySound = function() {
     } else {
         embed.parentNode.removeChild(embed);
     }
+  }
 }

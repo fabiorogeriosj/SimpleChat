@@ -23,6 +23,9 @@ input:focus {
   padding-bottom: 20px;
   background-color: #fff;
 }
+.myli {
+  background: #E1E1E2;
+}
 .editor input[type="text"] {
   width: 100%;
   padding: 5px;
@@ -33,6 +36,10 @@ input:focus {
 }
 .option {
   float: right;
+  font-size: 14px;
+}
+.option input {
+  margin-left: 5px;
 }
 .cont {
   float: left;
