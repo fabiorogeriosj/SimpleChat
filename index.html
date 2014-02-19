@@ -1,23 +1,45 @@
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="icon" href="/images/favicon.png" />
   <title>eTalk2Me</title>
   <link rel="stylesheet" type="text/css" href="/css/2me.css">
 </head>
 <body id="body-etalk2me">
-  <div class="editor">
-    <img src="/images/logo-into.png" class="logo">
-    <input class="mensagem" maxlength="250" placeholder="Conectando..." type="text" onfocus="onfocus" id="saidaChat" readonly="readonly"> 
-    <div class="option"> 
-      <input type="checkbox" checked="checked" id="autoscroll" value="autoscroll"> AutoScroll
-      <input type="checkbox" checked="checked" id="notification" value="notification"> Notification
-    </div>
-    <div class="cont"> 
-      250
-    </div>
+  <div class="top">
+    <center>
+      <div class="topcenter">
+        <img src="/images/logo-top.png" class="logo">
+        
+        <div class="cl"></div>
+
+        <div class="config">
+          <img src="/images/config.png">
+        </div>
+
+        <div class="option"> 
+            <input type="checkbox" checked="checked" id="autoscroll" value="autoscroll"> AutoScroll
+            <input type="checkbox" checked="checked" id="notification" value="notification"> Notification
+          </div>
+
+        <input class="mensagem" maxlength="250" placeholder="Conectando..." type="text" onfocus="onfocus" id="saidaChat" readonly="readonly"> 
+
+        <div class="numberusers"></div>
+
+        <div class="cont"> 
+          250
+        </div>
+      </div>
+    </center>
+    <div class="cl"></div>
   </div>
-  <div class="container">
-    <div class="mensagens-enviadas"><ul id="entradaChat"></ul></div>
-  </div>
+  <center>
+    <div class="container">
+      <div class="mensagens-enviadas">
+        <ul id="entradaChat"></ul>
+      </div>
+    </div>
+  </center>
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,800' rel='stylesheet' type='text/css'>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>

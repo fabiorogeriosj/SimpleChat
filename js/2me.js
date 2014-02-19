@@ -5,6 +5,13 @@ $(function(){
     $('#saidaChat').attr('placeholder','Digite sua mensagem...');
     $('#saidaChat').removeAttr('readonly');
     $('#saidaChat').focus();
+
+    iosocket.emit('connect');
+
+    iosocket.on('countusers', function(c) {
+      $(".numberusers").text(c + ' online');
+    });
+
     iosocket.on('message', function(message) {
       WriteMessage(message);
       window.focus();
@@ -30,6 +37,10 @@ $(function(){
       }
     }
   });
+
+  $('.config').click(function (){
+    $('.option').toggle("slow");
+  })
 });
 
 var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;

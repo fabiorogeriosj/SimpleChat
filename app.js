@@ -2,7 +2,7 @@ var app = require('express')();
 var path = require('path');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var port = 8090;
+var port = 80;
 
 server.listen(port);
 console.log('se conecte na: http://localhost:' + port);
@@ -25,8 +25,23 @@ app.get('/sounds/*', function(req, res){
 });
 
 //Sockets
+var connectCounter = 0;
+
 io.sockets.on('connection', function (socket) {
+	
     socket.on('message', function (msg) {
         socket.broadcast.emit('message', msg);
     });
+
+    socket.on('connect', function() { 
+    	connectCounter++;
+    	socket.broadcast.emit('countusers', connectCounter);
+		socket.emit('countusers', connectCounter);
+    });
+	socket.on('disconnect', function() { 
+		connectCounter--;
+		socket.broadcast.emit('countusers', connectCounter);
+		socket.emit('countusers', connectCounter);
+	});
+
 });
