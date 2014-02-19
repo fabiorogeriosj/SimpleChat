@@ -1,7 +1,7 @@
 $(function(){
   var iosocket = io.connect();
   iosocket.on('connect', function () {
-    $('#entradaChat').append($('<li>Conectado com sucesso</li>'));
+    $('#entradaChat').prepend($('<li>Conectado com sucesso</li>'));
     $('#saidaChat').attr('placeholder','Digite sua mensagem...');
     $('#saidaChat').removeAttr('readonly');
     $('#saidaChat').focus();
@@ -18,7 +18,7 @@ $(function(){
       PlaySound();
     });
     iosocket.on('disconnect', function() {
-      $('#entradaChat').append('<li>Desconectado</li>');
+      $('#entradaChat').prepend('<li>Desconectado</li>');
     });
   });
 
@@ -60,16 +60,16 @@ var WriteMessage = function (message, my){
     var srcimg = GetImage(message);
     var img = '<img src="'+GetImage(message)+'"/>';
     if(message.replace(srcimg, '').length > 0){
-      $('#entradaChat').append($('<li class="'+classMy+'"></li>').text(message.replace(srcimg, '')));  
+      $('#entradaChat').prepend($('<li class="'+classMy+'"></li>').text(message.replace(srcimg, '')));  
     }
-    $('#entradaChat').append($('<li class="'+classMy+'"></li>').html(img));
+    $('#entradaChat').prepend($('<li class="'+classMy+'"></li>').html(img));
   } else if(message.indexOf('www.youtube.com/watch?v=') > -1 || message.indexOf('youtu.be/') > -1){
     var srcvideo = GetVideo(message);
     var video = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+srcvideo+'" frameborder="0" allowfullscreen></iframe>';
-    $('#entradaChat').append($('<li class="'+classMy+'"></li>').text(message));  
-    $('#entradaChat').append($('<li class="'+classMy+'"></li>').html(video));
+    $('#entradaChat').prepend($('<li class="'+classMy+'"></li>').text(message));  
+    $('#entradaChat').prepend($('<li class="'+classMy+'"></li>').html(video));
   } else {
-    $('#entradaChat').append($('<li class="'+classMy+'"></li>').text(message));
+    $('#entradaChat').prepend($('<li class="'+classMy+'"></li>').text(message));
   }
   if($('#autoscroll').get(0).checked){
     window.scrollTo(0,document.body.scrollHeight);
@@ -138,7 +138,7 @@ var PlaySound = function() {
             embed.id= "embed";
             embed.setAttribute("src", "/sounds/bip.mp3");
             embed.setAttribute("hidden", "true");
-        document.getElementById('body-etalk2me').appendChild(embed);
+        document.getElementById('body-etalk2me').prependChild(embed);
     } else {
         embed.parentNode.removeChild(embed);
     }
